@@ -168,73 +168,51 @@
         Info Situjuah System / 2026 / Ari Suandi Putra
     </footer>
 
-    <script src="leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
     <script>
-        AOS.init({ duration: 1200, once: true });
+    AOS.init({ duration: 1200, once: true });
 
-        // Splash screen logic
-        let progress = 0;
-        const progressBar = document.getElementById('progress');
-        const interval = setInterval(() => {
-            progress += Math.random() * 15;
-            if(progress > 100) progress = 100;
-            progressBar.style.width = progress + '%';
-            if (progress >= 100) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    document.getElementById('splash').style.opacity = '0';
-                    setTimeout(() => {
-                        document.getElementById('splash').classList.add('hidden');
-                        window.scrollTo(0, 0); // Selalu kembali ke beranda saat refresh
-                    }, 800);
-                }, 400);
-            }
-        }, 150);
+    // 1. UPDATE KOORDINAT BARU DISINI
+    const coords = [-0.30337535388509684, 100.59627365466883];
+    const map = L.map('map', { zoomControl: false }).setView(coords, 18);
 
-        // MAP LOGIC (REFINED)
-        const coords = [-0.30338254520370717, 100.59630483857883];
-        const map = L.map('map', { zoomControl: false }).setView(coords, 18);
+    L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+        maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'],
+        attribution: '© Google Satellite | Info Situjuah'
+    }).addTo(map);
 
-        // Google Satellite Hybrid Tiles
-        L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-            maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'],
-            attribution: '© Google Satellite | Info Situjuah'
-        }).addTo(map);
-
-        const icon = L.divIcon({ className: 'pulse-marker', iconSize: [25, 25] });
-        const marker = L.marker(coords, { icon: icon }).addTo(map);
-        
-        // Popup dengan Main Sinkhole Video Cloudinary
- marker.bindPopup(`
-    <div class="text-black p-4 min-w-[300px] font-sans">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="bulletin-red" style="width:8px; height:8px;"></span>
-            <h4 class="font-black text-sm uppercase italic">🕳️ Live Sawah Luluih</h4>
+    const icon = L.divIcon({ className: 'pulse-marker', iconSize: [25, 25] });
+    const marker = L.marker(coords, { icon: icon }).addTo(map);
+    
+    // 2. PERBAIKAN TOTAL POPUP & LINK NAVIGASI
+    marker.bindPopup(`
+        <div class="text-black p-4 min-w-[300px] font-sans">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bulletin-red" style="width:8px; height:8px;"></span>
+                <h4 class="font-black text-sm uppercase italic">🕳️ Live Sawah Luluih</h4>
+            </div>
+            <div class="aspect-video bg-zinc-100 rounded-sm overflow-hidden mb-2 shadow-inner">
+                <video width="100%" height="100%" controls autoplay muted loop preload="auto">
+                    <source src="https://res.cloudinary.com/dhzvmlusf/video/upload/v1767777527/sinkhole_od0pfg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p class="text-[9px] text-zinc-400 mb-4 font-bold italic uppercase tracking-wider">
+                Sumber Video: TikTok @bayukrasiva
+            </p>
+            <div class="mb-4 bg-zinc-50 p-2 border border-zinc-200">
+                <p class="text-[9px] text-zinc-500 uppercase font-bold mb-1">Koordinat Presisi</p>
+                <p class="text-[10px] font-mono tracking-tighter">${coords[0]}, ${coords[1]}</p>
+            </div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${coords[0]},${coords[1]}" target="_blank" 
+               class="block bg-black text-yellow-500 text-center py-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-900 transition shadow-lg">
+                Buka Navigasi Pro
+            </a>
         </div>
-        <div class="aspect-video bg-zinc-100 rounded-sm overflow-hidden mb-2 shadow-inner">
-            <video width="100%" height="100%" controls autoplay muted loop preload="auto">
-                <source src="https://res.cloudinary.com/dhzvmlusf/video/upload/v1767777527/sinkhole_od0pfg.mp4" type="video/mp4">
-            </video>
-        </div>
-        <p class="text-[9px] text-zinc-400 mb-4 font-bold italic uppercase tracking-wider">
-            Sumber Video: TikTok @bayukrasiva
-        </p>
-        <div class="mb-4 bg-zinc-50 p-2 border border-zinc-200">
-            <p class="text-[9px] text-zinc-500 uppercase font-bold mb-1">Koordinat Presisi</p>
-            <p class="text-[10px] font-mono tracking-tighter">${coords[0]}, ${coords[1]}</p>
-        </div>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=${coords[0]},${coords[1]}" target="_blank" 
-           class="block bg-black text-yellow-500 text-center py-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-900 transition shadow-lg">
-            Buka Navigasi Pro
-        </a>
-    </div>
-`).openPopup();
+    `).openPopup();
 
-        L.circle(coords, { color: '#ff0000', weight: 1, fillOpacity: 0.05, radius: 45 }).addTo(map);
-    </script>
+    L.circle(coords, { color: '#ff0000', weight: 1, fillOpacity: 0.05, radius: 45 }).addTo(map);
+</script>
 </body>
 
 </html>
+
 
