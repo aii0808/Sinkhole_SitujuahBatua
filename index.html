@@ -207,32 +207,34 @@
         const marker = L.marker(coords, { icon: icon }).addTo(map);
         
         // Popup dengan Main Sinkhole Video Cloudinary
-        marker.bindPopup(`
-            <div class="text-black p-4 min-w-[300px] font-sans">
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="bulletin-red" style="width:8px; height:8px;"></span>
-                    <h4 class="font-black text-sm uppercase italic">🕳️ Live Sawah Luluih</h4>
-                </div>
-                <div class="aspect-video bg-zinc-100 rounded-sm overflow-hidden mb-2 shadow-inner">
-                    <video width="100%" height="100%" controls autoplay muted loop preload="auto">
-                        <source src="https://res.cloudinary.com/dhzvmlusf/video/upload/v1767777527/sinkhole_od0pfg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <p class="text-[9px] text-zinc-400 mb-4 font-bold italic uppercase tracking-wider">
-                    Sumber Video: TikTok @bayukrasiva
-                </p>
-                <div class="mb-4 bg-zinc-50 p-2 border border-zinc-200">
-                    <p class="text-[9px] text-zinc-500 uppercase font-bold mb-1">Koordinat Presisi</p>
-                    <p class="text-[10px] font-mono tracking-tighter">${coords[0]}, ${coords[1]}</p>
-                </div>
-                <a href="http://googleusercontent.com/maps.google.com/5${coords[0]},${coords[1]}" target="_blank" 
-                   class="block bg-black text-yellow-500 text-center py-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-900 transition shadow-lg">
-                    Buka Navigasi Pro
-                </a>
-            </div>
-        `).openPopup();
+        // CARI BAGIAN INI DI BARIS SEKITAR 230-250 DI GITHUB
+marker.bindPopup(`
+    <div class="text-black p-4 min-w-[300px] font-sans">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="bulletin-red" style="width:8px; height:8px;"></span>
+            <h4 class="font-black text-sm uppercase italic">🕳️ Live Sawah Luluih</h4>
+        </div>
+        <div class="aspect-video bg-zinc-100 rounded-sm overflow-hidden mb-2 shadow-inner">
+            <video width="100%" height="100%" controls autoplay muted loop preload="auto">
+                <source src="https://res.cloudinary.com/dhzvmlusf/video/upload/v1767777527/sinkhole_od0pfg.mp4" type="video/mp4">
+            </video>
+        </div>
+        <p class="text-[9px] text-zinc-400 mb-4 font-bold italic uppercase tracking-wider">
+            Sumber Video: TikTok @bayukrasiva
+        </p>
+        <div class="mb-4 bg-zinc-50 p-2 border border-zinc-200">
+            <p class="text-[9px] text-zinc-500 uppercase font-bold mb-1">Koordinat Presisi</p>
+            <p class="text-[10px] font-mono tracking-tighter">${coords[0]}, ${coords[1]}</p>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=${coords[0]},${coords[1]}" target="_blank" 
+           class="block bg-black text-yellow-500 text-center py-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-900 transition shadow-lg">
+            Buka Navigasi Pro
+        </a>
+    </div>
+`).openPopup();
 
         L.circle(coords, { color: '#ff0000', weight: 1, fillOpacity: 0.05, radius: 45 }).addTo(map);
     </script>
 </body>
+
 </html>
