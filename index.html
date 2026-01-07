@@ -207,8 +207,7 @@
         const marker = L.marker(coords, { icon: icon }).addTo(map);
         
         // Popup dengan Main Sinkhole Video Cloudinary
-        // CARI BAGIAN INI DI BARIS SEKITAR 230-250 DI GITHUB
-marker.bindPopup(`
+ marker.bindPopup(`
     <div class="text-black p-4 min-w-[300px] font-sans">
         <div class="flex items-center gap-2 mb-3">
             <span class="bulletin-red" style="width:8px; height:8px;"></span>
@@ -226,7 +225,7 @@ marker.bindPopup(`
             <p class="text-[9px] text-zinc-500 uppercase font-bold mb-1">Koordinat Presisi</p>
             <p class="text-[10px] font-mono tracking-tighter">${coords[0]}, ${coords[1]}</p>
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=${coords[0]},${coords[1]}" target="_blank" 
+        <a href="https://www.google.com/maps/dir/?api=1&destination=${coords[0]},${coords[1]}" target="_blank" 
            class="block bg-black text-yellow-500 text-center py-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-900 transition shadow-lg">
             Buka Navigasi Pro
         </a>
@@ -238,3 +237,4 @@ marker.bindPopup(`
 </body>
 
 </html>
+
